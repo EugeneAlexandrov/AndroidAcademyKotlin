@@ -1,9 +1,9 @@
 @file:Suppress(
-    "UNREACHABLE_CODE",
-    "DuplicatedCode",
-    "UNUSED_VARIABLE",
-    "ControlFlowWithEmptyBody",
-    "ConstantConditionIf"
+        "UNREACHABLE_CODE",
+        "DuplicatedCode",
+        "UNUSED_VARIABLE",
+        "ControlFlowWithEmptyBody",
+        "ConstantConditionIf"
 )
 
 package day_1_kotlin.langrus.assignments
@@ -41,24 +41,29 @@ object KotlinWorkshop2 {
             print("Введите число в диапазоне 0..$nonNullUpperBound включительно: ")
             // Сохраняем введённое с клавиатуры число в "userInput".
             val userInput: Int = scanner.nextInt()
-            if (true) {
-
+            if (randomNumber == userInput) {
+                print("Поздравляю, задуманное число $randomNumber")
+                break
+            } else if (randomNumber < userInput) {
+                print("Ваше число больше задуманного")
+            } else {
+                print("Ваше число меньше задуманного")
             }
         }
 
+/* Бонусные задания */
 
-        /* Бонусные задания */
+// TODO 2: Раскомментируй. Проинициализируй "numbersArray".
+//  "numbersArray" это массив целочисленных значений, длинной 5 чисел.
+        val numbersArray = Array(5, { 0 })
 
-        // TODO 2: Раскомментируй. Проинициализируй "numbersArray".
-        //  "numbersArray" это массив целочисленных значений, длинной 5 чисел.
-//        val numbersArray =
-
-        // TODO 3: Раскомментируй. Проинициализируй свойство "size" длинной массива "numbersArray".
-        //  Измени условия повтора бесконечного цикла while так, чтобы он стал конечным и выполнился не более "size" раз.
+// TODO 3: Раскомментируй. Проинициализируй свойство "size" длинной массива "numbersArray".
+//  Измени условия повтора бесконечного цикла while так, чтобы он стал конечным и выполнился не более "size" раз.
         println("\n Программа 2. \"Введите коллекцию чисел\"")
-//        val size =
+
+        val size = numbersArray.size
         var counter = 0
-        while (true) {
+        while (counter < size) {
             print("Введите число в диапазоне 0..10 включительно: ")
             val userInput: Int = scanner.nextInt()
 
@@ -68,20 +73,24 @@ object KotlinWorkshop2 {
             //  - Если введено 9 - сложи и добавь (2 + size);
             //  - Иначе не добавляй ничего.
             //  Используй выражение "When".
-            when {
-
+            when (userInput) {
+                3 -> numbersArray[counter] = userInput
+                5 -> numbersArray[counter] = size * 5
+                9 -> numbersArray[counter] = size + 2
             }
 
             counter++
         }
 
-        // TODO 5: Выведи в консоль значения элементов массива и индекс, на котором они находятся.
-        //  Новый элемент на новой строке. Это должно выглядеть как "индекс: значение".
-
+// TODO 5: Выведи в консоль значения элементов массива и индекс, на котором они находятся.
+//  Новый элемент на новой строке. Это должно выглядеть как "индекс: значение".
+        for ((index, value) in numbersArray.withIndex()) {
+            println("Cell $index: $value")
+        }
     }
 
 
-    /* Для корректного прогона воркшопа не модифицируй утилиты ниже */
+/* Для корректного прогона воркшопа не модифицируй утилиты ниже */
 
     private fun getUpperBound(): Int? {
         println("Программа 1. \"Угадай число\"")

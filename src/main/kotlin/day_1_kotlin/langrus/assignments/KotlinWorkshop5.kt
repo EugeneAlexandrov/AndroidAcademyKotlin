@@ -10,15 +10,14 @@ interface Driveable {
 
 // Объявляем класс пассажирского транспорта вцелом.
 // Придадим такому транспорту свойство перемещаться под управлением водителя.
-abstract class Transport(protected var passengersCount: Int): Driveable
+abstract class Transport(protected var passengersCount: Int) : Driveable
 
 // Создадим реальный транспорт: "Велосипед". Он может управляться водителем и перевозит одного пассажира.
-class Bicycle: Transport(1) {
+class Bicycle : Transport(1) {
     override fun drive() {
         println("Ride a bicycle.")
     }
 }
-
 
 
 /* Рабочая зона */
@@ -27,15 +26,36 @@ class Bicycle: Transport(1) {
 //  См. ниже.
 // ? Имена классов и файлов Котлин принято называть с заглавной буквы, в формате "camelCase".
 // Например: "SomeLongClassName"
-//interface ...
+interface Sound {
+    fun makeSound()
+}
 
 // TODO 2: Создай свои собственные классы, например "Bus" и "Car".
 //  Эти классы не будут полностью написаны с нуля, они должны расширять общий класс "Transport",
 //  и дополнительно реализовывать придуманный тобой интерфейс.
 // ? Класс может наследовать только один класс, но реализовывать несколько интерфейсов, например:
 // class Kitty(): Cat, Cuteable, Sleepable, Furryable {}
-//class Bus ...
-//class Car ...
+class Bus(var count: Int) : Transport(count), Sound {
+    override fun drive() {
+        println("Drive Bus")
+    }
+
+    override fun makeSound() {
+        println("BEEP")
+    }
+
+}
+
+class Car(var count: Int) : Transport(count), Sound {
+    override fun drive() {
+        println("Ride a car.")
+    }
+
+    override fun makeSound() {
+        println("beep")
+    }
+
+}
 
 // TODO 3: Протестируй работоспособность твоего транспорта.
 object VehiclesTest {
@@ -46,23 +66,28 @@ object VehiclesTest {
         testBus()
         testCar()
         testBicycle()
+        testBusParts()
     }
 
     private fun testBus() {
         println("Testing how bus drives...")
-//        val bus = ...
+        val bus = Bus(25)
+        bus.drive()
+        bus.makeSound()
     }
 
     private fun testCar() {
         println("Testing how car drives...")
-//        val car = ...
+        val car = Car(5)
+        car.drive()
+        car.makeSound()
     }
 
     private fun testBicycle() {
         println("Testing how bicycle drives...")
-//        ...
+        val bicycle = Bicycle()
+        bicycle.drive()
     }
-
 
 
     /* Бонусные задания */
@@ -71,10 +96,13 @@ object VehiclesTest {
     //  Т.е. каждый набор независимых свойств - отдельно, чтобы в тестируемой сущности были скрыты все свойства,
     //  не принадлежащие к данному набору.
     private fun testBusParts() {
+        val bus = Bus(20)
         println("Testing bus's feature 1...")
-
+        val horn: Sound = bus
+        horn.makeSound()
 
         println("Testing bus's feature 2...")
-
+        val engine: Driveable = bus
+        engine.drive()
     }
 }
